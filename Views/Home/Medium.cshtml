@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Medium Level";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the Easy Level.</h1>
+    <p>I want you to guess the number between 1 and 100</p>
+
+        <form asp-controller="Home" asp-action="Answer">
+        <input type="hidden" name="level" value="Medium">
+        <input type="number" name="inputAnswer">
+        <input type="submit" value="Submit Answer">
+    </form> 
+
+    <h3>@TempData["Message"]</h3>
+    <h3>@TempData["Help"]</h3>
+</div>

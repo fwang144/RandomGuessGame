@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the Guessing Game</h1>
+    <p>The odject of the game is to guess the number that is in the certain range.</p>
+
+    <form asp-controller="Home" asp-action="Easy">
+        <button class="btn btn-default">Easy</button>
+    </form>
+
+    <form asp-controller="Home" asp-action="Medium">
+        <button class="btn btn-default">Medium</button>
+    </form>
+
+    <form asp-controller="Home" asp-action="Hard">
+        <button class="btn btn-default">Hard</button>
+    </form>
+    
+
+</div>
