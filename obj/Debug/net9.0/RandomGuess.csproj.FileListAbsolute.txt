@@ -95,3 +95,4 @@ C:\Users\fwang\Documents\CodingDojo\DotNet_stack\RandomGuess\obj\Debug\net9.0\re
 C:\Users\fwang\Documents\CodingDojo\DotNet_stack\RandomGuess\obj\Debug\net9.0\RandomGuess.pdb
 C:\Users\fwang\Documents\CodingDojo\DotNet_stack\RandomGuess\obj\Debug\net9.0\RandomGuess.genruntimeconfig.cache
 C:\Users\fwang\Documents\CodingDojo\DotNet_stack\RandomGuess\obj\Debug\net9.0\ref\RandomGuess.dll
+C:\Users\fwang\Documents\CodingDojo\DotNet_stack\RandomGuess\obj\Debug\net9.0\RandomGuess.sourcelink.json
