@@ -12,7 +12,35 @@ public class SimpleRandomTests
         bool expected = true;
 
         // Act
-        bool result = SimpleRandom.Easy(a);
+        bool result = SimpleRandom.ValidEasy(a);
+
+        // Assert
+        result.Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void Medium_Success()
+    {
+        // Arrange
+        int a = 15;
+        bool expected = true;
+
+        // Act
+        bool result = SimpleRandom.ValidMedium(a);
+
+        // Assert
+        result.Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void Hard_Success()
+    {
+        // Arrange
+        int a = 500;
+        bool expected = true;
+
+        // Act
+        bool result = SimpleRandom.ValidHard(a);
 
         // Assert
         result.Should().Be(expected);
@@ -23,13 +51,28 @@ public class SimpleRandomTests
     {
         // Arrange
         int a = 11;
-        bool expected = 11 <= 10;
+        bool expected = false;
 
         // Act
-        bool result = SimpleRandom.Easy(a);
+        bool result = SimpleRandom.ValidEasy(a);
 
         // Assert
         result.Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void Hard_Negative_Failed()
+    {
+        // Arrange
+        int a = -100;
+        bool expected = false;
+
+        //Act
+        bool result = SimpleRandom.ValidHard(a);
+
+        //Assert
+        result.Should().Be(expected);
+
     }
     
 

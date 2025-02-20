@@ -25,6 +25,7 @@ public class HomeController : Controller
         Random rand = new Random();
         int answer = rand.Next(1,10);
 
+
         HttpContext.Session.SetInt32("answer" , answer);
 
         return View();
@@ -45,6 +46,7 @@ public class HomeController : Controller
     {
         Random rand = new Random();
         int answer = rand.Next(1,1000);
+        
         HttpContext.Session.SetInt32("answer" , answer);
 
         return View();
@@ -74,19 +76,7 @@ public class HomeController : Controller
                 TempData["Help"] = "Too High";
             }
 
-            if (level == "Easy")
-            {
-                
-                return View("Easy");
-            }
-            else if (level == "Medium")
-            {
-                return View("Medium");
-            }
-            else 
-            {
-                return View("Hard");
-            }
+            return View(level);
   
         }
         

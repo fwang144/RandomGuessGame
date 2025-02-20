@@ -1,22 +1,37 @@
 
 public class SimpleRandom
 {
-    public static bool Easy(int a)
+    /// <summary>
+    /// Check if the guess is a valid easy guess in the range (0, 10].
+    /// </summary>
+    /// <param name="guess">The guess.</param>
+    /// <returns>Returns true if valid, false if invalid.</returns>
+    public static bool ValidEasy(int guess)
     {
-        return a <= 10;
-
+        // (0, 10]   
+        return 0 < guess && guess <= 10;
     }
 
-    public static bool Medium(int a)
+    /// <summary>
+    /// Check if the guess is a valid medium guess in the range (0, 100].
+    /// </summary>
+    /// <param name="guess">The guess.</param>
+    /// <returns>Returns true if valid, false if invalid.</returns>
+    public static bool ValidMedium(int guess)
     {
-
-        return a <= 100;
+        // (0, 100]   
+        return 0 < guess && guess <= 100;
     }
 
-    public static bool Hard(int a)
+    /// <summary>
+    /// Check if the guess is a valid hard guess in the range (0, 1000].
+    /// </summary>
+    /// <param name="guess">The guess.</param>
+    /// <returns>Returns true if valid, false if invalid.</returns>
+    public static bool ValidHard(int guess)
     {
-
-        return a <= 1000;
+        // (0, 1000]   
+        return 0 < guess && guess <= 1000;
     }
 
 }
