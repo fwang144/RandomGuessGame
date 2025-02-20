@@ -34,4 +34,17 @@ public class SimpleRandom
         return 0 < guess && guess <= 1000;
     }
 
+    /// <summary>
+    /// Checks a guess for a specific difficulty level against the known answer.
+    /// </summary>
+    /// <param name="difficulty">The difficulty level.</param>
+    /// <param name="answer">The randomly generated answer.</param>
+    /// <param name="guess">The guess from the user.</param>
+    /// <returns>The comparison result of the <paramref name="guess"/> against the <paramref name="answer"/>.</returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public static ComparisonResult CheckGuess(DifficultyLevel difficulty, int answer, int guess)
+    {
+        // Hints... https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/switch-expression
+        throw new NotImplementedException();
+    }
 }
