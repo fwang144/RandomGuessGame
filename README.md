@@ -31,9 +31,14 @@ Bisection Method
 ![image](https://github.com/user-attachments/assets/1414d15a-2534-4737-90c8-8ee02c95f8b1)
 
 ## Unit Testing:
-Coming Soon
+![image](https://github.com/user-attachments/assets/65bc4009-ea6c-414a-80b4-3177f9827ec4)
+
+Followed a Test Driven Development while testing simple random class
+
 
 
 ## Reference: 
 ### Tips on how to solve the Guessing Game, Use the Bisection Methods.
 https://en.wikipedia.org/wiki/Bisection_method
+
+https://en.wikipedia.org/wiki/Test-driven_development
