@@ -4,6 +4,8 @@ VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomGuess", "RandomGuess\RandomGuess.csproj", "{A945F2A9-61EF-4CCB-B7C7-3314D5B60BC7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomGuess.Tests", "RandomGuess.Tests\RandomGuess.Tests.csproj", "{6634CE15-11D1-4127-81C3-46BC1962FB23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,5 +22,9 @@ Global
 		{A945F2A9-61EF-4CCB-B7C7-3314D5B60BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A945F2A9-61EF-4CCB-B7C7-3314D5B60BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A945F2A9-61EF-4CCB-B7C7-3314D5B60BC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6634CE15-11D1-4127-81C3-46BC1962FB23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6634CE15-11D1-4127-81C3-46BC1962FB23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6634CE15-11D1-4127-81C3-46BC1962FB23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6634CE15-11D1-4127-81C3-46BC1962FB23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
