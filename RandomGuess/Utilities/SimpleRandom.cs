@@ -1,3 +1,4 @@
+namespace RandomGuess;
 
 public class SimpleRandom
 {
@@ -45,6 +46,35 @@ public class SimpleRandom
     public static ComparisonResult CheckGuess(DifficultyLevel difficulty, int answer, int guess)
     {
         // Hints... https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/switch-expression
-        throw new NotImplementedException();
+        switch (difficulty)
+        {
+            case DifficultyLevel.Easy:
+                if (!ValidEasy(guess))
+                {
+                    throw new ArgumentOutOfRangeException(nameof(guess), $"The {difficulty} guess of {guess} is not within range (0, 10]");
+                }
+                break;
+            case DifficultyLevel.Medium:
+                if (!ValidMedium(guess))
+                {
+                    throw new ArgumentOutOfRangeException(nameof(guess), $"The {difficulty} guess of {guess} is not within range (0, 100]");
+                }
+                break;
+            case DifficultyLevel.Hard:
+                if (!ValidHard(guess))
+                {
+                    throw new ArgumentOutOfRangeException(nameof(guess), $"The {difficulty} guess of {guess} is not within range (0, 1000]");
+                }
+                break;
+        }
+        if (answer > guess)
+        {
+            return ComparisonResult.TooLow;
+        }
+        else if (answer < guess)
+        {
+            return ComparisonResult.TooHigh;
+        }
+        return ComparisonResult.Equal;
     }
 }

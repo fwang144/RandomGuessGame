@@ -1,5 +1,7 @@
 using FluentAssertions;
+using RandomGuess;
 
+namespace RandomGuessTests;
 
 [TestClass]
 public class SimpleRandomTests
@@ -92,6 +94,57 @@ public class SimpleRandomTests
     }
 
     [TestMethod]
+    public void CheckGuess_Medium_TooHigh()
+    {
+        // Arrange
+        DifficultyLevel difficulty = DifficultyLevel.Medium;
+        int answer = 25;
+        int guess = 32;
+        ComparisonResult expected = ComparisonResult.TooHigh;
+
+        // Act
+        var result = SimpleRandom.CheckGuess(difficulty, answer, guess);
+
+        // Assert
+        result.Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void CheckGuess_Easy_Equal()
+    {
+        // Arrange
+        DifficultyLevel difficulty = DifficultyLevel.Easy;
+        int answer = 5;
+        int guess = 5;
+        ComparisonResult expected = ComparisonResult.Equal;
+
+        // Act
+        var result = SimpleRandom.CheckGuess(difficulty, answer, guess);
+
+        // Assert
+        result.Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void CheckGuess_InvalidEasyGuess_ThrowsException()
+    {
+        // Arrange
+        DifficultyLevel difficulty = DifficultyLevel.Easy;
+        int answer = 10;
+        int guess = 15;
+
+        // Act
+        // https://fluentassertions.com/exceptions/
+        // The "Act" method is a lambda expression, ask Copilot "what is a lambda expression in C#"
+        // Follow-up question: "Are lambda expressions in C# like the ones in Python?"
+        var act = () => SimpleRandom.CheckGuess(difficulty, answer, guess);
+
+        // Assert
+        // We wrote this test case using string formatting, as we change the test variables, we don't need to remember to change the expected message!
+        act.Should().Throw<ArgumentOutOfRangeException>().WithMessage($"The {difficulty} guess of {guess} is not within range (0, 10]*");
+    }
+
+    [TestMethod]
     public void CheckGuess_InvalidMediumGuess_ThrowsException()
     {
         // Arrange
@@ -107,7 +160,7 @@ public class SimpleRandomTests
 
         // Assert
         // We wrote this test case using string formatting, as we change the test variables, we don't need to remember to change the expected message!
-        act.Should().Throw<ArgumentOutOfRangeException>().WithMessage($"The {difficulty} guess of {guess} is not within range (0, 100]");
+        act.Should().Throw<ArgumentOutOfRangeException>().WithMessage($"The {difficulty} guess of {guess} is not within range (0, 100]*");
     }
 
     [TestMethod]
@@ -125,6 +178,6 @@ public class SimpleRandomTests
         var act = () => SimpleRandom.CheckGuess(difficulty, answer, guess);
 
         // Assert
-        act.Should().Throw<ArgumentOutOfRangeException>().WithMessage($"The {difficulty} guess of {guess} is not within range (0, 1000]");
+        act.Should().Throw<ArgumentOutOfRangeException>().WithMessage($"The {difficulty} guess of {guess} is not within range (0, 1000]*");
     }
 }
