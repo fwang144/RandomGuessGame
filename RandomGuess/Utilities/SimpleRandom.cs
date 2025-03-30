@@ -67,14 +67,15 @@ public class SimpleRandom
                 }
                 break;
         }
-        if (answer > guess)
-        {
-            return ComparisonResult.TooLow;
-        }
-        else if (answer < guess)
-        {
-            return ComparisonResult.TooHigh;
-        }
-        return ComparisonResult.Equal;
+
+        // Ternary operators! https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-operator
+        // bool result = (condition) ? (result if condition is true) : (result if condition is false)
+
+        // This is an example of a nested ternary operator. 
+        return (answer == guess)
+            ? ComparisonResult.Equal
+            : (answer > guess)
+                ? ComparisonResult.TooLow
+                : ComparisonResult.TooHigh;
     }
 }

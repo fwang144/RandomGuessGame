@@ -25,10 +25,13 @@ public class HomeController : Controller
         Random rand = new Random();
         int answer = rand.Next(1,10);
 
-
         HttpContext.Session.SetInt32("answer" , answer);
 
-        return View();
+        ViewData["Level"] = DifficultyLevel.Easy;
+
+        // Even though the route is "/Easy", return
+        // the view template "RandomGuessLevel" since it's dynamic.
+        return View("RandomGuessLevel");
     }
 
     public IActionResult Medium()
@@ -39,7 +42,9 @@ public class HomeController : Controller
 
         HttpContext.Session.SetInt32("answer" , answer);
 
-        return View();
+        ViewData["Level"] = DifficultyLevel.Medium;
+
+        return View("RandomGuessLevel");
     }
 
     public IActionResult Hard()
@@ -49,37 +54,41 @@ public class HomeController : Controller
         
         HttpContext.Session.SetInt32("answer" , answer);
 
-        return View();
+        ViewData["Level"] = DifficultyLevel.Hard;
+
+        return View("RandomGuessLevel");
     }
     [HttpPost]
-    public IActionResult Answer(int inputAnswer, string level)
+    public IActionResult Answer(int guess, DifficultyLevel level)
     {
+        int answer = HttpContext.Session.GetInt32("answer")
+            ?? throw new InvalidOperationException("Expected to find 'answer' stored in the session as an integer, but did not find one.");
 
-        int? keyAnswer = HttpContext.Session.GetInt32("answer");
-        if (inputAnswer == keyAnswer)
+        ComparisonResult result = SimpleRandom.CheckGuess(level, answer, guess);
+        ViewData["Level"] = level;
+
+        switch (result)
         {
-
-            return Redirect("/"); 
-            
-        }
-        else
-        {   
-            TempData["Message"] = "Try Again";
-
-            if (inputAnswer < keyAnswer)
-            {
+            case ComparisonResult.Equal:
+                return Redirect("/");
+            case ComparisonResult.TooLow:
+                TempData["Message"] = "Try Again";
                 TempData["Help"] = "Too Low";
-            }
-            else
-            {
 
+                // Even though level is an Enum, using it here means it will call
+                // level.toString() so if level is "DifficultyLevel.Easy", then 
+                // the statement is 'return View("Easy")' with would map to "easy.cshtml"
+                return View("RandomGuessLevel");
+                // return Redirect(level.ToString());
+            case ComparisonResult.TooHigh:
+                TempData["Message"] = "Try Again";
                 TempData["Help"] = "Too High";
-            }
+                return View("RandomGuessLevel");
+                // return Redirect(level.ToString());
+            default:
+                throw new InvalidOperationException($"Unsupported comparison result {result} for level {level} with guess {guess} and answer {answer}");
 
-            return View(level);
-  
         }
-        
     }
 
     public IActionResult Privacy()
