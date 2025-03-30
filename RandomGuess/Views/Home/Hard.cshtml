@@ -1,3 +1,5 @@
+@using RandomGuess.Models
+
 @{
     ViewData["Title"] = "Hard Level";
 }
@@ -7,7 +9,7 @@
     <p>I want you to guess the number between 1 and 1000</p>
         
     <form asp-controller="Home" asp-action="Answer">
-        <input type="hidden" name="level" value="Hard">
+        <input type="hidden" name="level" value="@DifficultyLevel.Hard">
         <input type="number" name="inputAnswer">
         <input type="submit" value="Submit Answer">
     </form> 
