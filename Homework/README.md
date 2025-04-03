@@ -13,7 +13,7 @@ When the user wins the game, they just get redirected to `/Home` and there's no 
 Another issue right now is that even though we have a dynamic template, we have three separate routes per difficulty.
 
 ### Assignment
- - [ ] Set up a singular route `/Home` with the following capabilities
+ - [X] Set up a singular route `/Home` with the following capabilities
  - [ ] Dynamically generate a set of buttons tha the user can click to select difficulty. These buttons are populated from the values on the Enum:
     _Motivation_ the motivation behind this is that if we add a new difficulty level to the Enum (like "Super ridiculously hard"), the HTML will automatically show that as an option that the user can select.
  - [ ] Once the selected difficulty is defined in the state (either via temp data, session, etc.) then render the game where they can guess.

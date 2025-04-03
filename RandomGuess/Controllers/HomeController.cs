@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using RandomGuess.Models;
 using Microsoft.AspNetCore.Http;
+using System.Collections;
 
 namespace RandomGuess.Controllers;
 
@@ -16,8 +17,29 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        string key = HttpContext.Session.GetString("Level");
+        switch (key)
+        {
+            case "Easy":
+            {
+                ViewData["Level"] = DifficultyLevel.Easy;
+                return View("RandomGuessLevel");
+            }
+            case "Medium":
+            {
+                ViewData["Level"] = DifficultyLevel.Medium;
+                return View("RandomGuessLevel");
+            }
+            case "Hard":
+            {
+                ViewData["Level"] = DifficultyLevel.Hard;
+                return View("RandomGuessLevel");
 
-        return View();
+            }
+            default:
+                return View();
+
+        }
     }
 
     public IActionResult Easy()
@@ -26,12 +48,15 @@ public class HomeController : Controller
         int answer = rand.Next(1,10);
 
         HttpContext.Session.SetInt32("answer" , answer);
+        
+        HttpContext.Session.SetString("Level", DifficultyLevel.Easy.ToString());
 
-        ViewData["Level"] = DifficultyLevel.Easy;
+        // relocate the viewdata to be in the index action class
+        //ViewData["Level"] = DifficultyLevel.Easy;
 
         // Even though the route is "/Easy", return
         // the view template "RandomGuessLevel" since it's dynamic.
-        return View("RandomGuessLevel");
+        return RedirectToAction("Index");
     }
 
     public IActionResult Medium()
@@ -42,9 +67,9 @@ public class HomeController : Controller
 
         HttpContext.Session.SetInt32("answer" , answer);
 
-        ViewData["Level"] = DifficultyLevel.Medium;
+        HttpContext.Session.SetString("Level", DifficultyLevel.Medium.ToString());
 
-        return View("RandomGuessLevel");
+        return RedirectToAction("Index");
     }
 
     public IActionResult Hard()
@@ -54,9 +79,9 @@ public class HomeController : Controller
         
         HttpContext.Session.SetInt32("answer" , answer);
 
-        ViewData["Level"] = DifficultyLevel.Hard;
+        HttpContext.Session.SetString("Level", DifficultyLevel.Hard.ToString());
 
-        return View("RandomGuessLevel");
+        return RedirectToAction("Index");
     }
     [HttpPost]
     public IActionResult Answer(int guess, DifficultyLevel level)
@@ -70,6 +95,7 @@ public class HomeController : Controller
         switch (result)
         {
             case ComparisonResult.Equal:
+                HttpContext.Session.SetString("Level", "right");
                 return Redirect("/");
             case ComparisonResult.TooLow:
                 TempData["Message"] = "Try Again";
