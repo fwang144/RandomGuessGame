@@ -17,8 +17,8 @@ Another issue right now is that even though we have a dynamic template, we have 
  - [ ] Dynamically generate a set of buttons tha the user can click to select difficulty. These buttons are populated from the values on the Enum:
     _Motivation_ the motivation behind this is that if we add a new difficulty level to the Enum (like "Super ridiculously hard"), the HTML will automatically show that as an option that the user can select.
  - [ ] Once the selected difficulty is defined in the state (either via temp data, session, etc.) then render the game where they can guess.
- - [ ] If they win, keep the level selected, but just show them a congratulations message. At this point, if the user selects a new difficulty, then reset the state.
- - [ ] Have a "Reset" button if the user guesses correctly, and reset to the original state.
+ - [X] If they win, keep the level selected, but just show them a congratulations message. At this point, if the user selects a new difficulty, then reset the state.
+ - [X] Have a "Reset" button if the user guesses correctly, and reset to the original state.
  - [ ] **BONUS** add styling! Use Colors! Use CSS! Talk to copilot to make this happen
  - [ ] **2nd BONUS** add a new difficulty level to the difficulty level enum, the new button should appear!
 

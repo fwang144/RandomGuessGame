@@ -38,4 +38,16 @@
 
     <h3>@TempData["Message"]</h3>
     <h3>@TempData["Help"]</h3>
+    <h3>@TempData["Reset"]</h3>
+
+    @if (@TempData["Reset"] != null)
+    {
+        <form asp-asp-controller="Home" asp-action="Reset">
+            <button>Reset</button>
+        </form>
+
+    }
+
+
+
 </div>

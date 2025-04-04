@@ -95,8 +95,10 @@ public class HomeController : Controller
         switch (result)
         {
             case ComparisonResult.Equal:
-                HttpContext.Session.SetString("Level", "right");
-                return Redirect("/");
+                TempData["Message"] = "Correct!";
+                TempData["Reset"] = "Would you like to reset?";
+
+                return View("RandomGuessLevel");
             case ComparisonResult.TooLow:
                 TempData["Message"] = "Try Again";
                 TempData["Help"] = "Too Low";
@@ -115,6 +117,12 @@ public class HomeController : Controller
                 throw new InvalidOperationException($"Unsupported comparison result {result} for level {level} with guess {guess} and answer {answer}");
 
         }
+    }
+    [HttpPost]
+    public IActionResult Reset()
+    {
+        HttpContext.Session.Clear();
+        return RedirectToAction("Index");
     }
 
     public IActionResult Privacy()
