@@ -1,4 +1,5 @@
-﻿@{
+﻿@using RandomGuess.Models
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,17 +7,27 @@
     <h1 class="display-4">Welcome to the Guessing Game</h1>
     <p>The odject of the game is to guess the number that is in the certain range.</p>
 
-    <form asp-controller="Home" asp-action="Easy">
+    @* <form asp-controller="Home" asp-action="Easy">
         <button class="btn btn-default">Easy</button>
-    </form>
+    </form> *@
 
-    <form asp-controller="Home" asp-action="Medium">
+    @foreach (var difficulty in Enum.GetNames<DifficultyLevel>())
+    {
+        <form asp-controller="Home" asp-action="@difficulty">
+            <button class="btn btn-default">@difficulty</button>
+        </form>
+    } 
+
+
+    @* <form asp-controller="Home" asp-action="Medium">
         <button class="btn btn-default">Medium</button>
     </form>
+    using System.Reflection.Metadata;
+    using System.Reflection.Metadata;
 
     <form asp-controller="Home" asp-action="Hard">
         <button class="btn btn-default">Hard</button>
-    </form>
+    </form> *@
     
 
 </div>
