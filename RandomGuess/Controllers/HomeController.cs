@@ -34,8 +34,12 @@ public class HomeController : Controller
             {
                 ViewData["Level"] = DifficultyLevel.Hard;
                 return View("RandomGuessLevel");
-
             }
+            case "Insane":
+            {
+                ViewData["Level"] = DifficultyLevel.Insane;
+                return View("RandomGuessLevel");
+            }            
             default:
 
                 return View();
@@ -84,6 +88,19 @@ public class HomeController : Controller
 
         return RedirectToAction("Index");
     }
+
+    public IActionResult Insane()
+    {
+        Random rand = new Random();
+        int answer = rand.Next(1,100000);
+        
+        HttpContext.Session.SetInt32("answer" , answer);
+
+        HttpContext.Session.SetString("Level", DifficultyLevel.Insane.ToString());
+
+        return RedirectToAction("Index");
+    }
+
     [HttpPost]
     public IActionResult Answer(int guess, DifficultyLevel level)
     {

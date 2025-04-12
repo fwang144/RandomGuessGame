@@ -180,4 +180,22 @@ public class SimpleRandomTests
         // Assert
         act.Should().Throw<ArgumentOutOfRangeException>().WithMessage($"The {difficulty} guess of {guess} is not within range (0, 1000]*");
     }
+
+    [TestMethod]
+    public void CheckGuess_InvalidInsaneGuess_ThrowsException()
+    {
+        // Arrange
+        DifficultyLevel difficulty = DifficultyLevel.Insane;
+        int answer = 5000;
+        int guess = 120000;
+
+        // Act
+        // https://fluentassertions.com/exceptions/
+        // The "Act" method is a lambda expression, ask Copilot "what is a lambda expression in C#"
+        // Follow-up question: "Are lambda expressions in C# like the ones in Python?"
+        var act = () => SimpleRandom.CheckGuess(difficulty, answer, guess);
+
+        // Assert
+        act.Should().Throw<ArgumentOutOfRangeException>().WithMessage($"The {difficulty} guess of {guess} is not within range (0, 100000]*");
+    }
 }

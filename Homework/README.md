@@ -20,7 +20,7 @@ Another issue right now is that even though we have a dynamic template, we have 
  - [X] If they win, keep the level selected, but just show them a congratulations message. At this point, if the user selects a new difficulty, then reset the state.
  - [X] Have a "Reset" button if the user guesses correctly, and reset to the original state.
  - [ ] **BONUS** add styling! Use Colors! Use CSS! Talk to copilot to make this happen
- - [ ] **2nd BONUS** add a new difficulty level to the difficulty level enum, the new button should appear!
+ - [X] **2nd BONUS** add a new difficulty level to the difficulty level enum, the new button should appear!
 
 ### Things to help guide
  * Search online or talk to copilot about strategies for managing "state" of a single view. How do people define that state (classes?) and how do they reset that state (default values on classes?)

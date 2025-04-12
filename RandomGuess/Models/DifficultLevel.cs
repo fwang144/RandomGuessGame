@@ -13,5 +13,9 @@ public enum DifficultyLevel
     /// <summary>
     /// Hard difficulty level, requires guesses between the range 0 and 1000.
     /// </summary>
-    Hard
+    Hard,
+    /// <summary>
+    /// Insane difficulty level, requires guesses between the range 0 and 100000.
+    /// </summary>
+    Insane
 }

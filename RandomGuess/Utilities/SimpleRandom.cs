@@ -36,6 +36,17 @@ public class SimpleRandom
     }
 
     /// <summary>
+    /// Check if the guess is a valid hard guess in the range (0, 1000].
+    /// </summary>
+    /// <param name="guess">The guess.</param>
+    /// <returns>Returns true if valid, false if invalid.</returns>
+    public static bool ValidInsane(int guess)
+    {
+        // (0, 1000]   
+        return 0 < guess && guess <= 100000;
+    }
+
+    /// <summary>
     /// Checks a guess for a specific difficulty level against the known answer.
     /// </summary>
     /// <param name="difficulty">The difficulty level.</param>
@@ -64,6 +75,12 @@ public class SimpleRandom
                 if (!ValidHard(guess))
                 {
                     throw new ArgumentOutOfRangeException(nameof(guess), $"The {difficulty} guess of {guess} is not within range (0, 1000]");
+                }
+                break;
+            case DifficultyLevel.Insane:
+                if (!ValidInsane(guess))
+                {
+                    throw new ArgumentOutOfRangeException(nameof(guess), $"The {difficulty} guess of {guess} is not within range (0, 100000]");
                 }
                 break;
         }
