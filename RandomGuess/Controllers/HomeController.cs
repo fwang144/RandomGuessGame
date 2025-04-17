@@ -18,6 +18,7 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         string key = HttpContext.Session.GetString("Level");
+        ViewData["key"] = key;
         switch (key)
         {
             case "Easy":
@@ -107,6 +108,8 @@ public class HomeController : Controller
         int answer = HttpContext.Session.GetInt32("answer")
             ?? throw new InvalidOperationException("Expected to find 'answer' stored in the session as an integer, but did not find one.");
 
+        string key = HttpContext.Session.GetString("Level");
+        ViewData["key"] = key;
         ComparisonResult result = SimpleRandom.CheckGuess(level, answer, guess);
         ViewData["Level"] = level;
 

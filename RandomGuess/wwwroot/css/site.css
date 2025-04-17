@@ -19,7 +19,7 @@ html {
 
 body {
   margin-bottom: 60px;
-}
+  }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);
@@ -28,4 +28,16 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+button:hover {
+  background-color: blue !important;
+  color: white !important;
+  border-color: blue !important;
+}
+
+.nav-link:hover {
+  background-color: yellow !important; /* Changes the background color to yellow */
+  color: black !important; /* Ensures the text is readable on yellow background */
+  border-radius: 5px; /* Adds a slight rounding to the edges for better aesthetics */
 }

@@ -38,6 +38,19 @@
         <input type="submit" value="Submit Answer">
     </form>
 
+    @if (!string.Equals(TempData["Message"], "Correct!")){
+        @foreach (var difficulty in Enum.GetNames<DifficultyLevel>())
+        {
+            @if (!@difficulty.ToString().Equals(ViewData["key"]))
+            {
+                <form asp-controller="Home" asp-action="@difficulty">
+                    <button class="btn btn-default">@difficulty</button>
+                </form>
+            }
+        } 
+    }
+
+
     <h3>@TempData["Message"]</h3>
     <h3>@TempData["Help"]</h3>
     <h3>@TempData["Reset"]</h3>
