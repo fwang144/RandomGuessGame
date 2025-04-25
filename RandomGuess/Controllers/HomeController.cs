@@ -17,7 +17,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        string key = HttpContext.Session.GetString("Level");
+        string? key = HttpContext.Session.GetString("Level");
         ViewData["key"] = key;
         switch (key)
         {
@@ -54,27 +54,18 @@ public class HomeController : Controller
         int answer = rand.Next(1,10);
 
         HttpContext.Session.SetInt32("answer" , answer);
-        
         HttpContext.Session.SetString("Level", DifficultyLevel.Easy.ToString());
-
-        // relocate the viewdata to be in the index action class
-        //ViewData["Level"] = DifficultyLevel.Easy;
-
-        // Even though the route is "/Easy", return
-        // the view template "RandomGuessLevel" since it's dynamic.
+        HttpContext.Session.SetInt32("Tries", 0); // Reset tries
         return RedirectToAction("Index");
     }
 
     public IActionResult Medium()
     {
         Random rand = new Random();
-
         int answer = rand.Next(1,100);
-
         HttpContext.Session.SetInt32("answer" , answer);
-
         HttpContext.Session.SetString("Level", DifficultyLevel.Medium.ToString());
-
+        HttpContext.Session.SetInt32("Tries", 0); // Reset tries
         return RedirectToAction("Index");
     }
 
@@ -82,11 +73,9 @@ public class HomeController : Controller
     {
         Random rand = new Random();
         int answer = rand.Next(1,1000);
-        
         HttpContext.Session.SetInt32("answer" , answer);
-
         HttpContext.Session.SetString("Level", DifficultyLevel.Hard.ToString());
-
+        HttpContext.Session.SetInt32("Tries", 0); // Reset tries
         return RedirectToAction("Index");
     }
 
@@ -94,11 +83,9 @@ public class HomeController : Controller
     {
         Random rand = new Random();
         int answer = rand.Next(1,100000);
-        
         HttpContext.Session.SetInt32("answer" , answer);
-
         HttpContext.Session.SetString("Level", DifficultyLevel.Insane.ToString());
-
+        HttpContext.Session.SetInt32("Tries", 0); // Reset tries
         return RedirectToAction("Index");
     }
 
@@ -108,35 +95,28 @@ public class HomeController : Controller
         int answer = HttpContext.Session.GetInt32("answer")
             ?? throw new InvalidOperationException("Expected to find 'answer' stored in the session as an integer, but did not find one.");
 
-        string key = HttpContext.Session.GetString("Level");
+        string? key = HttpContext.Session.GetString("Level");
         ViewData["key"] = key;
         ComparisonResult result = SimpleRandom.CheckGuess(level, answer, guess);
         ViewData["Level"] = level;
 
-        switch (result)
+        int tries = HttpContext.Session.GetInt32("Tries") ?? 0;
+        if (result == ComparisonResult.Equal)
         {
-            case ComparisonResult.Equal:
-                TempData["Message"] = "Correct!";
-                TempData["Reset"] = "Would you like to reset?";
-
-                return View("RandomGuessLevel");
-            case ComparisonResult.TooLow:
-                TempData["Message"] = "Try Again";
-                TempData["Help"] = "Too Low";
-
-                // Even though level is an Enum, using it here means it will call
-                // level.toString() so if level is "DifficultyLevel.Easy", then 
-                // the statement is 'return View("Easy")' with would map to "easy.cshtml"
-                return View("RandomGuessLevel");
-                // return Redirect(level.ToString());
-            case ComparisonResult.TooHigh:
-                TempData["Message"] = "Try Again";
-                TempData["Help"] = "Too High";
-                return View("RandomGuessLevel");
-                // return Redirect(level.ToString());
-            default:
-                throw new InvalidOperationException($"Unsupported comparison result {result} for level {level} with guess {guess} and answer {answer}");
-
+            TempData["Message"] = "Correct!";
+            TempData["Reset"] = "Would you like to reset?";
+            TempData["Tries"] = tries + 1; // Show final try count
+            HttpContext.Session.SetInt32("Tries", 0); // Reset tries after win
+            return View("RandomGuessLevel");
+        }
+        else
+        {
+            tries++;
+            HttpContext.Session.SetInt32("Tries", tries);
+            TempData["Tries"] = tries;
+            TempData["Message"] = "Try Again";
+            TempData["Help"] = result == ComparisonResult.TooLow ? "Too Low" : "Too High";
+            return View("RandomGuessLevel");
         }
     }
     [HttpPost]

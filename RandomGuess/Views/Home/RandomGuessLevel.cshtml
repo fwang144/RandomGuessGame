@@ -30,15 +30,8 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to the @title.</h1>
-    <p>I want you to guess the number between @range</p>
 
-    <form asp-controller="Home" asp-action="Answer">
-        <input type="hidden" name="level" value="@level">
-        <input type="number" name="guess">
-        <input type="submit" value="Submit Answer">
-    </form>
-
-    @if (!string.Equals(TempData["Message"], "Correct!")){
+     @if (!string.Equals(TempData["Message"], "Correct!")){
         @foreach (var difficulty in Enum.GetNames<DifficultyLevel>())
         {
             @if (!@difficulty.ToString().Equals(ViewData["key"]))
@@ -50,19 +43,26 @@
         } 
     }
 
+    <p>I want you to guess the number between @range</p>
 
+    <form asp-controller="Home" asp-action="Answer">
+        <input type="hidden" name="level" value="@level">
+        <input type="number" name="guess">
+        <input type="submit" value="Submit Answer">
+    </form>
+
+   
+
+
+    <h3>Number of Tries: @TempData["Tries"]</h3>
     <h3>@TempData["Message"]</h3>
     <h3>@TempData["Help"]</h3>
     <h3>@TempData["Reset"]</h3>
 
-    @if (@TempData["Reset"] != null)
+    @if ((TempData["Tries"] != null && int.TryParse(TempData["Tries"].ToString(), out var tries) && tries >= 3) || string.Equals(TempData["Message"], "Correct!"))
     {
-        <form asp-asp-controller="Home" asp-action="Reset">
+        <form asp-controller="Home" asp-action="Reset">
             <button>Reset</button>
         </form>
-
     }
-
-
-
 </div>
